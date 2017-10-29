@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Text,
   View,
-  StyleSheet
-} from 'react-native';
-
+  StyleSheet,
+  TextInput,
+  TouchableHighlight,
+  ActivityIndicator
+} from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -50,10 +52,40 @@ const styles = StyleSheet.create({
   }
 });
 export default class Main extends Component {
-  render(){
-    return(
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      isLoading: false,
+      error: false
+    };
+  }
+  handleChange(event) {
+    this.setState({
+      username: event.nativeEvent.text
+    });
+  }
+  handleSubmit() {
+    this.setState({
+      isLoading: true
+    });
+    console.log("SUBMIT", this.state.username);
+  }
+  render() {
+    return (
       <View style={styles.container}>
-        <Text>Are you working router?</Text>
+        <Text style={styles.title}>Find any Github User</Text>
+        <TextInput
+        style={styles.searchInput}
+        value={this.state.username}
+        onChange={this.handleChange.bind(this)}
+        />
+        <TouchableHighlight
+        style={styles.button}
+        underlayColor='white'
+        onPress={this.handleSubmit.bind(this)}>
+        <Text style={styles.buttonText}> SEARCH </Text>
+        </TouchableHighlight>
       </View>
     )
   }
