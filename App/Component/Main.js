@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: "stretch",
     justifyContent: "center"
+  },
+  errorText: {
+    fontSize: 30,
+    textAlign: "center",
+    color: '#9ea5af',
   }
 });
 
@@ -96,6 +101,12 @@ export default class Main extends Component {
     });
   }
   render() {
+    var showError = this.state.error ? (
+      <Text style={styles.errorText}> {this.state.error} </Text>
+    ) : (
+      <View />
+    );
+
     return (
       <View style={styles.mainContainer}>
         <Text style={styles.title}> Search for a Github User </Text>
@@ -111,6 +122,11 @@ export default class Main extends Component {
         >
           <Text style={styles.buttonText}> SEARCH </Text>
         </TouchableHighlight>
+        <ActivityIndicator
+        animating={this.state.isLoading}
+        color='#111'
+        size='large' />
+        {showError}
       </View>
     );
   }
