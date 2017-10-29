@@ -10,7 +10,7 @@ import {
   ActivityIndicator
 } from "react-native";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     padding: 30,
