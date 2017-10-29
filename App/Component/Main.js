@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { API } from "../Utils/GithubApi";
+import Dashboard from "./Dashboard";
 import {
   Text,
   View,
@@ -8,8 +10,8 @@ import {
   ActivityIndicator
 } from "react-native";
 
-const styles = StyleSheet.create({
-  container: {
+export const styles = StyleSheet.create({
+  mainContainer: {
     flex: 1,
     padding: 30,
     marginTop: 65,
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
 export default class Main extends Component {
   constructor(props) {
     super(props);
@@ -69,24 +72,46 @@ export default class Main extends Component {
     this.setState({
       isLoading: true
     });
-    console.log("SUBMIT", this.state.username);
+    // fetch data from github
+    API.getBio(this.state.username).then(res => {
+      if (res.message === "Not Found") {
+        this.setState({
+          error: "User not found",
+          isLoading: false
+        });
+      } else {
+        // reroute to the next route, passing github info
+        this.props.navigator.push({
+          component: Dashboard,
+          title: res.name || "Select an Option",
+          passProps: { userInfor: res }
+        });
+        // reset state
+        this.setState({
+          error: false,
+          isLoading: false,
+          username: ""
+        });
+      }
+    });
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Find any Github User</Text>
+      <View style={styles.mainContainer}>
+        <Text style={styles.title}> Search for a Github User </Text>
         <TextInput
-        style={styles.searchInput}
-        value={this.state.username}
-        onChange={this.handleChange.bind(this)}
+          style={styles.searchInput}
+          value={this.state.username}
+          onChange={this.handleChange.bind(this)}
         />
         <TouchableHighlight
-        style={styles.button}
-        underlayColor='white'
-        onPress={this.handleSubmit.bind(this)}>
-        <Text style={styles.buttonText}> SEARCH </Text>
+          style={styles.button}
+          underlayColor="white"
+          onPress={this.handleSubmit.bind(this)}
+        >
+          <Text style={styles.buttonText}> SEARCH </Text>
         </TouchableHighlight>
       </View>
-    )
+    );
   }
 }
