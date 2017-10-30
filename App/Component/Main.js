@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     marginTop: 65,
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "#c43fcc"
+    backgroundColor: "#b6bcc4"
   },
   title: {
     marginBottom: 20,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 30,
     textAlign: "center",
-    color: '#9ea5af',
+    color: "red"
   }
 });
 
@@ -89,7 +89,7 @@ export default class Main extends Component {
         this.props.navigator.push({
           component: Dashboard,
           title: res.name || "Select an Option",
-          passProps: { userInfor: res }
+          passProps: { userInfo: res }
         });
         // reset state
         this.setState({
@@ -123,9 +123,10 @@ export default class Main extends Component {
           <Text style={styles.buttonText}> SEARCH </Text>
         </TouchableHighlight>
         <ActivityIndicator
-        animating={this.state.isLoading}
-        color='#111'
-        size='large' />
+          animating={this.state.isLoading}
+          color="#111"
+          size="large"
+        />
         {showError}
       </View>
     );
