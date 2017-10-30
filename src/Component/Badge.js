@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: "#48BBEC",
+    backgroundColor: '#597253',
     paddingBottom: 10
   },
   name: {
