@@ -9,6 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import Badge from './Badge';
 import Separator from './Helpers/Separator';
+import ExternalLink from './Helpers/ExternalLink';
 
 var styles = StyleSheet.create({
   container: {
@@ -37,11 +38,15 @@ var styles = StyleSheet.create({
 
 export default class Repositories extends Component {
   openPage(url) {
-    console.log('open url', url);
+    this.props.navigator.push({
+      component: ExternalLink,
+      title: 'Viewing Github Repo',
+      passProps: {url}
+    })
   }
   render() {
     var repos = this.props.repos;
-    var list = repos.map((repo, index) => {
+    var list = repos.map((repo, id) => {
       var desc = repo.description ? <Text style={styles.description}> { repo.description } </Text> : <View />;
       return (
         <View key={repo.id}>
