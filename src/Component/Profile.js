@@ -39,7 +39,8 @@ export default class Profile extends Component {
       "following",
       "email",
       "bio",
-      "public_repos"
+      "public_repos",
+      'blog'
     ];
     var list = topicArr.map((item, index) => {
       if (!userInfo[item]) {
