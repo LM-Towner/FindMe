@@ -23,7 +23,7 @@ export default class gitHubUserFinder extends Component {
       <NavigatorIOS 
       initialRoute={{ 
         component: Main,
-        title: 'Find a Github User'
+        title: 'Find any Github User'
       }}
       style={styles.container}
       />
