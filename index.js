@@ -8,7 +8,7 @@ import {
   NavigatorIOS
 } from 'react-native';
 
-import Main from './App/Component/Main';
+import Main from './src/Component/Main';
 
 const styles = StyleSheet.create({
   container: {
