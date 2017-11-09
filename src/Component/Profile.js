@@ -42,12 +42,12 @@ export default class Profile extends Component {
       "public_repos",
       'blog'
     ];
-    var list = topicArr.map((item, index) => {
+    var list = topicArr.map((item, id) => {
       if (!userInfo[item]) {
-        return <View key={index} />;
+        return <View key={id} />;
       } else {
         return (
-          <View key={index}>
+          <View key={id}>
             <View style={styles.rowContainer}>
               <Text style={styles.rowTitle}> {this.getRowTitle(item)} </Text>
               <Text style={styles.rowContent}> {userInfo[item]} </Text>
